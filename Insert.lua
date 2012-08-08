@@ -9,7 +9,7 @@ toolbarbutton.Click:connect(function()
 
 local gui = 59219364
 
-b = game:GetService("InsertService"):LoadAsset(gui):GetChildren()[1] --This will probably lot load for most users.
+b = game:GetService("InsertService"):LoadAsset(gui):GetChildren()[1] --This will probably not load for most users.
 
 b.Parent = game.CoreGui
 b.Name = "InputGui"
@@ -26,7 +26,7 @@ gobutton.MouseButton1Click:connect(function()
 i = game:GetService("InsertService"):LoadAsset(tostring(input.Text))
 i.Parent = game:GetService("Workspace")
 i.Name = "ID: "..input.Text
-i:MakeJoints()
+i:MakeJoints() --Just in case...You may never know.
 b:Destroy()
 end)
 
