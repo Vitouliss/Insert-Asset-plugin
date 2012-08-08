@@ -9,7 +9,7 @@ toolbarbutton.Click:connect(function()
 
 local gui = 59219364
 
-b = game:GetService("InsertService"):LoadAsset(gui):GetChildren()[1]
+b = game:GetService("InsertService"):LoadAsset(gui):GetChildren()[1] --This will probably lot load for most users.
 
 b.Parent = game.CoreGui
 b.Name = "InputGui"
