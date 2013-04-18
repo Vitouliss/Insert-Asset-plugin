@@ -35,7 +35,7 @@ exit.Parent.Parent:Destroy()
 end)
 
 else
-print("TRRRRRRRRRRRRRRROOOOOOOOOOOOLLLLLLLLLOOOO")
+print("Possibly bug: InsertService could not load service")
 end
 end
 end 
