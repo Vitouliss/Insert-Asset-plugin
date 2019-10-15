@@ -1,45 +1,52 @@
--- 
+local insertService = game:GetService("InsertService")
 
-self = PluginManager():CreatePlugin()
+local coreGui = game:GetService("CoreGui")
+local inputGui = script.Parent.inputGui
 
-toolbar = self:CreateToolbar('InsertObject')
+local toolbar = plugin:CreateToolbar("insertAsset")
+toolbarButton = toolbar:CreateButton("Insert Menu", "Opens the insertAsset menu", "")
 
-toolbarbutton = toolbar:CreateButton('Insert Menu', 'Inserts a model/item','')
-
-toolbarbutton.Click:connect(function()
-
-  local Gui = 59219364
-	local coreholder = game:GetService('CoreGui')
-
-	b = game:GetService("InsertService"):LoadAsset(Gui):GetChildren()[1] --This will probably not load for most users anymore.
-
-	b.Parent = coreholder -- CoreGui? Seems a bit crazy don't you think?
-	b.Name = "InputGui"
-
-	local gobutton = coreholder.InputGui.MainFrame.InsertButton
-	if gobutton then
-		local input = coreholder.InputGui.MainFrame.Input
-		if input then
-			local exit = coreholder.InputGui.MainFrame.Exit
-			if exit then
-				
-				gobutton.MouseButton1Click:connect(function()
-					i = game:GetService("InsertService"):LoadAsset(tostring(input.Text))
-					i.Parent = game:GetService("Workspace")
-					i.Name = "ID: "..input.Text
-					i:MakeJoints() --Just in case...You may never know.
-					b:Destroy()
-				end)
-
-				exit.MouseButton1Click:connect(function()
-					exit.Parent.Parent:Destory()
-				end)
-
-			else
-				error("Possibe bug: Insert Service could not load service");
-
-			end
-		end
+toolbarButton.Click:Connect(function()
+	
+	-- If the inputGui doesn't exist yet the plugin will insert it
+	if(coreGui:FindFirstChild("inputGui")) then
+		warn("inputGui already exists in coreGui.")
+	else
+		inputGui.Parent = coreGui
+		print("inputGui opened")
 	end
+	
+end)
 
-end) 
+-- insertAssetButton
+inputGui.mainFrame.insertButton.MouseButton1Click:Connect(function()
+	
+	-- If the TextBox doesn't contain any text the plugin will not try inserting
+	if(inputGui.mainFrame.inputBox.Text == "") then
+		warn("inputId cannot be unspecified.")
+	else
+		
+		local success, model = pcall(function()
+			return insertService:LoadAsset(inputGui.mainFrame.inputBox.Text)
+		end)
+		
+		if success then
+			model.Parent = workspace
+			model.Name = "ID: " .. inputGui.mainFrame.inputBox.Text
+			model:MakeJoints()
+			print("Model loaded, inserted into Workspace.")
+		else
+			warn("Model failed to load.")
+		end
+		
+	end
+	
+end)
+
+-- close gui button
+inputGui.mainFrame.closeButton.MouseButton1Click:Connect(function()
+	
+	inputGui.Parent = script.Parent
+	print("inputGui closed")
+	
+end)

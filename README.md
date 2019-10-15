@@ -1,5 +1,6 @@
 ## Insert Asset Plugin (For ROBLOX Studio)
 
-This is a small quick plugin I wrote a while ago. It doesn't work like it used to but you can insert ROBLOX created models, hats, gear etc. and models you already acquired on your user account.
+This is a small quick plugin I wrote a while ago. This plugin can insert models you have acquired on your account, and all hats, gears, faces, etc. 
 
-I don't even know if the plugin even works anymore. I'll try to fix it though. 
+# Installation
+There is currently no way to upload a Gui to GitHub, so you have to grab it yourself (https://www.roblox.com/library/4128982063/inputGui). Create a model, put both the plugin's script and the Gui inside and save it to your local plugins folder.
